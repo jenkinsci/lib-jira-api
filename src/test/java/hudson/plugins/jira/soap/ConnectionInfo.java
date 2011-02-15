@@ -27,33 +27,29 @@ package hudson.plugins.jira.soap;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 /**
  * @author Kohsuke Kawaguchi
  * @author <a href="mailto:jieryn@gmail.com">Jesse Farinacci</a>
  */
-public final class ConnectionInfo {
-    String userName = "jenkins";
-    String password = "jenkins";
+public class ConnectionInfo
+{
+  String userName = "jenkins";
 
-    public ConnectionInfo() throws IOException {
-	final File f = new File(new File(System.getProperty("user.home")),
-		".jenkins-ci.org");
+  String password = "jenkins";
 
-	if (f != null && f.exists() && f.canRead()) {
-	    InputStream inputStream = null;
-	    try {
-		final Properties prop = new Properties();
-		inputStream = new FileInputStream(f);
-		prop.load(inputStream);
-		userName = prop.getProperty("userName");
-		password = prop.getProperty("password");
-	    } finally {
-		if (inputStream != null)
-		    inputStream.close();
-	    }
-	}
+  public ConnectionInfo() throws IOException
+  {
+    final File f = new File(new File(System.getProperty("user.home")),
+        ".jenkins-ci.org");
+
+    if (f != null && f.exists() && f.canRead())
+    {
+      final Properties prop = new Properties();
+      prop.load(new FileInputStream(f));
+      userName = prop.getProperty("userName");
+      password = prop.getProperty("password");
     }
+  }
 }
