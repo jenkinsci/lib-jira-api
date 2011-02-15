@@ -33,62 +33,54 @@ import org.junit.Test;
 /**
  * @author <a href="mailto:jieryn@gmail.com">Jesse Farinacci</a>
  */
-public class JiraSoapServiceTest
-{
-  public static final String URL     = "http://issues.jenkins-ci.org/rpc/soap/jirasoapservice-v2";
+public final class JiraSoapServiceTest {
+    private static final String URL = "http://issues.jenkins-ci.org/rpc/soap/jirasoapservice-v2";
 
-  public static final String PROJECT = "JENKINS";
+    private static final String PROJECT = "JENKINS";
 
-  public static final String USER    = "jieryn";
+    private static final String USER = "jieryn";
 
-  private JiraSoapService    service;
+    private JiraSoapService service;
 
-  private String             loginToken;
+    private String loginToken;
 
-  @Before
-  public void setUp() throws Exception
-  {
-    service = new JiraSoapServiceServiceLocator().getJirasoapserviceV2(new URL(
-        URL));
+    @Before
+    public void setUp() throws Exception {
+	service = new JiraSoapServiceServiceLocator()
+		.getJirasoapserviceV2(new URL(URL));
 
-    ConnectionInfo connectionInfo = new ConnectionInfo();
-    loginToken = service
-        .login(connectionInfo.userName, connectionInfo.password);
-  }
+	ConnectionInfo connectionInfo = new ConnectionInfo();
+	loginToken = service.login(connectionInfo.userName,
+		connectionInfo.password);
+    }
 
-  @Test
-  public void testGetIssue1() throws Exception
-  {
-    Assert.assertNotNull(service.getIssue(loginToken, "JENKINS-1"));
-  }
+    @Test
+    public void testGetIssue1() throws Exception {
+	Assert.assertNotNull(service.getIssue(loginToken, "JENKINS-1"));
+    }
 
-  @Test
-  public void testGetRemoteComponents1() throws Exception
-  {
-    Assert.assertNotNull(service.getComponents(loginToken, PROJECT));
-  }
+    @Test
+    public void testGetRemoteComponents1() throws Exception {
+	Assert.assertNotNull(service.getComponents(loginToken, PROJECT));
+    }
 
-  @Test
-  public void testGetResolutions1() throws Exception
-  {
-    Assert.assertNotNull(service.getResolutions(loginToken));
-  }
+    @Test
+    public void testGetResolutions1() throws Exception {
+	Assert.assertNotNull(service.getResolutions(loginToken));
+    }
 
-  @Test
-  public void testGetServerInfo1() throws Exception
-  {
-    Assert.assertNotNull(service.getServerInfo(loginToken));
-  }
+    @Test
+    public void testGetServerInfo1() throws Exception {
+	Assert.assertNotNull(service.getServerInfo(loginToken));
+    }
 
-  @Test
-  public void testGetStatuses1() throws Exception
-  {
-    Assert.assertNotNull(service.getStatuses(loginToken));
-  }
+    @Test
+    public void testGetStatuses1() throws Exception {
+	Assert.assertNotNull(service.getStatuses(loginToken));
+    }
 
-  @Test
-  public void testGetUser1() throws Exception
-  {
-    Assert.assertNotNull(service.getUser(loginToken, USER));
-  }
+    @Test
+    public void testGetUser1() throws Exception {
+	Assert.assertNotNull(service.getUser(loginToken, USER));
+    }
 }
