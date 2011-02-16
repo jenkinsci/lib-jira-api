@@ -97,4 +97,53 @@
     </dependency>
   </dependencies>
 
+  <profiles>
+    <profile>
+      <id>run-its</id>
+      <!--
+           This profile will run extra tests that hit the LIVE http://issues.jenkins-ci.org server. They
+           can be useful to verify the WSDL code generation is correct, but probably should not be run
+           as part of the normal unit test bucket. In order for the tests to pass you should create a
+           $HOME/.jenkins-ci.org properties file with userName and password keys for your JIRA credentials.
+           The profile can easily be invoked with: mvn -P run-its clean test
+      -->
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>add-test-source</id>
+                <goals>
+                  <goal>add-test-source</goal>
+                </goals>
+                <configuration>
+                  <sources>
+                    <source>src/it/java</source>
+                  </sources>
+                </configuration>
+              </execution>
+              <execution>
+                <id>add-test-resource</id>
+                <goals>
+                  <goal>add-test-resource</goal>
+                </goals>
+                <configuration>
+                  <resources>
+                    <resource>
+                      <directory>src/it/resources</directory>
+                      <filtering>true</filtering>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>
