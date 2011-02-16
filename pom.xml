@@ -16,6 +16,58 @@
   <name>JIRA API</name>
   <description>Remote API for JIRA</description>
 
+  <licenses>
+    <license>
+      <name>The MIT license</name>
+      <url>https://github.com/jenkinsci/lib-jira-api/raw/master/LICENSE.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>kohsuke</id>
+      <name>Kohsuke Kawaguchi</name>
+      <email>kk@kohsuke.org</email>
+    </developer>
+    <developer>
+      <id>jieryn</id>
+      <name>Jesse Farinacci</name>
+      <email>jieryn@gmail.com</email>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/jenkinsci/lib-jira-api.git</connection>
+    <developerConnection>scm:git:git@github.com:jenkinsci/lib-jira-api.git</developerConnection>
+    <url>https://github.com/jenkinsci/lib-jira-api</url>
+  </scm>
+
+  <repositories>
+    <repository>
+      <id>m.g.o-public</id>
+      <url>http://maven.glassfish.org/content/groups/public/</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>m.g.o-public</id>
+      <url>http://maven.glassfish.org/content/groups/public/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <distributionManagement>
+    <repository>
+      <id>java.net-m2-repository</id>
+      <url>http://maven.jenkins-ci.org/content/repositories/releases/</url>
+    </repository>
+    <site>
+      <id>github-project-site</id>
+      <url>gitsite:git@github.com/jenkinsci/lib-jira-api</url>
+    </site>
+  </distributionManagement>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
