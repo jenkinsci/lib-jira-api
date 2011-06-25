@@ -1,8 +1,7 @@
 import hudson.plugins.jira.soap.JiraSoapService;
-import hudson.plugins.jira.soap.JiraSoapServiceService;
-import hudson.plugins.jira.soap.JiraSoapServiceServiceLocator;
 import hudson.plugins.jira.soap.RemoteComment;
 import hudson.plugins.jira.soap.RemoteFieldValue;
+import org.jenkinsci.jira.JIRA;
 
 import java.net.URL;
 
@@ -11,9 +10,7 @@ import java.net.URL;
  */
 public class Foo {
     public static void main(String[] args) throws Exception {
-        JiraSoapServiceService jiraSoapServiceGetter = new JiraSoapServiceServiceLocator();
-
-        JiraSoapService service = jiraSoapServiceGetter.getJirasoapserviceV2(new URL(new URL("http://issues.hudson-ci.org/"), "rpc/soap/jirasoapservice-v2"));
+        JiraSoapService service = JIRA.connect(new URL("http://issues.jenkins-ci.org/"));
         String token = service.login("kohsuke","kohsuke");
         // if an issue doesn't exist an exception will be thrown
         service.getIssue(token, "HUDSON-2916");
