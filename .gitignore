@@ -1,5 +1,8 @@
 .classpath
 .project
+*.iml
+*.ipr
+*.iws
 .settings/
 target/
 work/
