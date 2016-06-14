@@ -12,7 +12,7 @@ import java.net.URL;
  */
 public class JIRA {
     /**
-     * Connects to the confluence server.
+     * Connects to the JIRA server.
      */
     public static JiraRestClient connect(URL jiraUrl, String username, String password) throws IOException {
         return new AsynchronousJiraRestClientFactory()
