@@ -82,8 +82,8 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>${maven-compiler-plugin.version}</version>
           <configuration>
-            <source>${compileSource}</source>
-            <target>${compileTarget}</target>
+            <source>1.7</source>
+            <target>1.7</target>
             <showDeprecation>true</showDeprecation>
             <showWarnings>true</showWarnings>
           </configuration>
@@ -114,6 +114,14 @@
       <plugin>
         <artifactId>maven-site-plugin</artifactId>
         <version>${maven-site-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
       </plugin>
     </plugins>
   </build>
