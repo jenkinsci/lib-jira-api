@@ -1,3 +1,5 @@
+import com.atlassian.jira.rest.client.api.JiraRestClient;
+import com.atlassian.jira.rest.client.api.domain.Issue;
 import hudson.plugins.jira.soap.JiraSoapService;
 import hudson.plugins.jira.soap.RemoteComment;
 import hudson.plugins.jira.soap.RemoteFieldValue;
@@ -10,19 +12,10 @@ import java.net.URL;
  */
 public class Foo {
     public static void main(String[] args) throws Exception {
-        JiraSoapService service = JIRA.connect(new URL("http://issues.jenkins-ci.org/"));
-        String token = service.login("kohsuke","kohsuke");
+        JiraRestClient service = JIRA.connect(new URL("http://issues.jenkins-ci.org/"),"kohsuke","kohsuke");
         // if an issue doesn't exist an exception will be thrown
-        service.getIssue(token, "HUDSON-2916");
+        Issue issue = service.getIssueClient().getIssue("JENKINS-2916").claim();
 
-        // add comment
-        RemoteComment rc = new RemoteComment();
-        rc.setBody("testing comment");
-        service.addComment(token, "HUDSON-2916", rc);
-
-        // resolve.
-        // comment set here doesn't work. see http://jira.atlassian.com/browse/JRA-11278
-        service.progressWorkflowAction(token,"HUDSON-2916","5" /*this is apparently the ID for "resolved"*/,
-                new RemoteFieldValue[]{new RemoteFieldValue("comment",new String[]{"closing comment"})});
+        System.out.println(issue);
     }
 }
