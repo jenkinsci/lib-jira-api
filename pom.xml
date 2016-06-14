@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.jenkins-ci</groupId>
     <artifactId>jenkins</artifactId>
-    <version>1.13</version>
+    <version>1.36</version>
   </parent>
 
   <artifactId>jira-api</artifactId>
@@ -76,40 +76,6 @@
         <version>0.3.1</version>
       </extension>
     </extensions>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>${maven-compiler-plugin.version}</version>
-          <configuration>
-            <source>1.7</source>
-            <target>1.7</target>
-            <showDeprecation>true</showDeprecation>
-            <showWarnings>true</showWarnings>
-          </configuration>
-        </plugin>
-        <plugin>
-          <artifactId>maven-release-plugin</artifactId>
-          <version>${maven-release-plugin.version}</version>
-          <configuration>
-            <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
-            <autoVersionSubmodules>true</autoVersionSubmodules>
-            <goals>clean deploy</goals>
-            <preparationGoals>clean deploy</preparationGoals>
-            <releaseProfiles>release</releaseProfiles>
-          </configuration>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>${maven-surefire-plugin.version}</version>
-          <configuration>
-            <parallel>methods</parallel>
-            <testFailureIgnore>true</testFailureIgnore>
-            <threadCount>4</threadCount>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
     <plugins>
       <plugin>
         <artifactId>maven-site-plugin</artifactId>
@@ -286,17 +252,4 @@
       </build>
     </profile>
   </profiles>
-
-  <repositories>
-    <repository>
-      <id>m.g.o-public</id>
-      <url>http://maven.glassfish.org/content/groups/public/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
 </project>
