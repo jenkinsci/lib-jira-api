@@ -2,13 +2,9 @@ package org.jenkinsci.jira;
 
 import com.atlassian.jira.rest.client.api.JiraRestClient;
 import com.atlassian.jira.rest.client.internal.async.AsynchronousJiraRestClientFactory;
-import hudson.plugins.jira.soap.JiraSoapService;
-import hudson.plugins.jira.soap.JiraSoapServiceServiceLocator;
 
-import javax.xml.rpc.ServiceException;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
