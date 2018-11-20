@@ -5,5 +5,5 @@ Possibly useful links
 ---------------------
 
 * [Maven generated site](http://jenkinsci.github.com/lib-jira-api/)
-* [Jenkins on Jenkins Job](http://ci.jenkins-ci.org/job/lib-jira-api/)
+* [Jenkins on Jenkins Job](https://ci.jenkins.io/job/jenkinsci-libraries/job/lib-jira-api/)
 
