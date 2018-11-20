@@ -3,16 +3,18 @@ pipeline {
     agent { docker 'maven:3-alpine' }
     stages{
         stage("Build"){
-            withMaven(
-                    maven: 'mvn',
-                    jdk: 'jdk8',
-                    publisherStrategy: 'EXPLICIT') {
-                sh "mvn clean install -B -U -e"
+            steps{
+                withMaven(
+                        maven: 'mvn',
+                        jdk: 'jdk8',
+                        publisherStrategy: 'EXPLICIT') {
+                    sh "mvn clean install -B -U -e"
+                }
             }
         }
         stage ('Archive'){
             steps{
-                junit 'target/surefire-reports/**/*.xml'
+                junit testResults:'target/surefire-reports/**/*.xml', allowEmptyResults: true
                 archiveArtifacts artifacts: 'target/**/*.jar'
             }
         }
