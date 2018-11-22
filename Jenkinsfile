@@ -11,8 +11,8 @@ node("linux") {
                     "PATH+MVN=${tool 'mvn'}/bin",
                     'PATH+JDK=$JAVA_HOME/bin',
             ]) {
-                timeout(30) {
-                    sh 'mvn --batch-mode clean install -Dmaven.test.failure.ignore=true -s settings-azure.xml'
+                timeout(60) {
+                    sh 'mvn --batch-mode clean install -Dmaven.test.failure.ignore=true'
                 }
             }
         }
