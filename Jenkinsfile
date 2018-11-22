@@ -1,18 +1,26 @@
 #!/usr/bin/env groovy
+node("linux") {
+    timestamps {
+        stage('Checkout') {
+            checkout scm
+        }
 
-node {
-    checkout scm
+        stage('Build') {
+            withEnv([
+                    "JAVA_HOME=${tool 'jdk8'}",
+                    "PATH+MVN=${tool 'mvn'}/bin",
+                    'PATH+JDK=$JAVA_HOME/bin',
+            ]) {
+                timeout(60) {
+                    sh 'mvn --batch-mode clean install -Dmaven.test.failure.ignore=true'
+                }
+            }
+        }
 
-    withEnv([
-        "JAVA_HOME=${tool 'jdk8'}",
-        "PATH+MAVEN=${tool 'mvn'}/bin",
-        "PATH+JAVA=${env.JAVA_HOME}/bin",
-        ]) {
-        stage 'Invoke Maven'
-        sh 'mvn clean install -B -U -e'
-
-        stage 'Archive'
-        junit 'target/surefire-reports/**/*.xml'
-        archiveArtifacts artifacts: 'target/**/*.jar'
+        stage('Archive') {
+            junit testResults: '**/target/surefire-reports/TEST-*.xml', allowEmptyResults: true
+            archiveArtifacts artifacts: '**/target/**/*.jar'
+            findbugs pattern: '**/target/findbugsXml.xml'
+        }
     }
 }
