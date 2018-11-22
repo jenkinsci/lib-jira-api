@@ -1,15 +1,26 @@
 #!/usr/bin/env groovy
-pipeline {
-    agent { docker 'maven:3-alpine' }
-    stages{
-        stage('Build'){
-            steps{
-                withMaven(
-                        maven: 'mvn',
-                        jdk: 'jdk8') {
-                    sh "mvn clean install -B -U -e"
+node("linux") {
+    timestamps {
+        stage('Checkout') {
+            checkout scm
+        }
+
+        stage('Build') {
+            withEnv([
+                    "JAVA_HOME=${tool 'jdk8'}",
+                    "PATH+MVN=${tool 'mvn'}/bin",
+                    'PATH+JDK=$JAVA_HOME/bin',
+            ]) {
+                timeout(30) {
+                    sh 'mvn --batch-mode clean install -Dmaven.test.failure.ignore=true -s settings-azure.xml'
                 }
             }
+        }
+
+        stage('Archive') {
+            junit '**/target/surefire-reports/TEST-*.xml'
+            archiveArtifacts artifacts: '**/target/**/*.jar'
+            findbugs pattern: '**/target/findbugsXml.xml'
         }
     }
 }
