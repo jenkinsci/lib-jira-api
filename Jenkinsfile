@@ -6,9 +6,7 @@ pipeline {
             steps{
                 withMaven(
                         maven: 'mvn',
-                        jdk: 'jdk8',
-                        options: [junitPublisher(disabled: false),artifactsPublisher(disabled: true)],
-                        publisherStrategy: 'EXPLICIT') {
+                        jdk: 'jdk8') {
                     sh "mvn clean install -B -U -e"
                 }
             }
